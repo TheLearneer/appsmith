@@ -2,8 +2,12 @@
 export default {
   getSelectedRow: (props, moment, _) => {
     const selectedRowIndices = Array.isArray(props.selectedRowIndices)
-      ? props.selectedRowIndices
-      : [props.selectedRowIndices];
+      ? props.selectedRowIndices.every((el) => typeof el === "number")
+        ? props.selectedRowIndices
+        : []
+      : typeof props.selectedRowIndices === "number"
+      ? [props.selectedRowIndices]
+      : [];
     let selectedRowIndex;
     if (props.multiRowSelection) {
       selectedRowIndex = selectedRowIndices.length
